@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\JenisFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +28,14 @@ Route::middleware(['web', 'disableBackButton'])->group(function(){
 
 Route::prefix('superadmin')->name('superadmin.')->group(function(){
     Route::middleware(['auth:web', 'disableBackButton', 'superadmin'])->group(function(){
-        Route::get('/dashboard', function(){ return view('pages.dashboard'); })->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+        Route::resource('jenis-form', JenisFormController::class);
+        Route::resource('form', FormController::class);
     });
 });
 
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['auth:web', 'disableBackButton', 'admin'])->group(function(){
-        Route::get('/dashboard', function(){ return view('pages.dashboard'); })->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     });
 });

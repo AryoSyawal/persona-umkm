@@ -28,6 +28,19 @@
       <ul class="navbar-nav pt-lg-3">
       @if(auth()->user()->role == 1)
         <li class="nav-item {{ request()->routeIs('superadmin.dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('superadmin.dashboard') }}"><span class="nav-link-title">Dashboard</span></a></li>
+        <li class="nav-item dropdown {{ str_contains(Route::currentRouteName(), 'superadmin.jenis-form') | str_contains(Route::currentRouteName(), 'superadmin.form') ? 'active' : '' }}">
+            <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false">
+              <span class="nav-link-title">Kuisioner</span>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-columns">
+                <div class="dropdown-menu-column">
+                  <a class="dropdown-item" href="{{ route('superadmin.jenis-form.index') }}">Jenis Form</a>
+                  <a class="dropdown-item" href="{{ route('superadmin.form.index') }}">Form</a>
+                </div>
+              </div>
+            </div>
+          </li>
       @endif
       @if(auth()->user()->role == 2)
         <li class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.dashboard') }}"><span class="nav-link-title">Dashboard</span></a></li>
